@@ -4,8 +4,8 @@ const app = express()
 const PORT = process.env.PORT || 5000
 
 //Additional import
-require('./services/passport')
 require('./models/User')
+require('./services/passport')
 const AuthRoute = require('./routes/auth')
 const mongoose = require('mongoose')
 const keys = require('./config/keys')
