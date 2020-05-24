@@ -1,0 +1,20 @@
+{
+  "name": "WoroApps",
+  "version": "1.0.0",
+  "description": "WoroApps is emails campaign application",
+  "main": "index.js",
+  "author": "Maxxoto",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "devDependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.9.15",
+    "nodemon": "^2.0.4",
+    "passport": "^0.4.1",
+    "passport-google-oauth20": "^2.0.0"
+  }
+}
