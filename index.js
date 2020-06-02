@@ -1,16 +1,36 @@
-//Main import
+//Top level import
 const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 5000
 
-//Additional import
+//Models import
 require('./models/User')
-require('./services/passport')
-const AuthRoute = require('./routes/auth')
-const mongoose = require('mongoose')
-const keys = require('./config/keys')
 
+//Services import
+require('./services/passport')
+
+//Routes import
+const AuthRoute = require('./routes/auth')
+
+//Additional Import
+const mongoose = require('mongoose')
+const keys = require('./config/dev')
+const cookieSession = require('cookie-session')
+const passport = require('passport')
+
+//Set connection into mongoDB
 mongoose.connect(keys.mongoURI,{ useNewUrlParser: true , useUnifiedTopology: true })
+
+app.use(
+    cookieSession({
+        maxAge : 30 * 24 * 60 * 60 * 1000, //30 Days , 24 Hours , 60 Minutes , 60 Seconds , 1000 Milliseconds,
+        keys : [keys.cookieKey]
+    })
+)
+
+app.use(passport.initialize())
+app.use(passport.session())
+
 AuthRoute(app)
 
 //or
