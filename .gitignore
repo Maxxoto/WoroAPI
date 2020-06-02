@@ -1,4 +1,3 @@
 node_modules
-key.js
 yarn.lock
-/config/dev.js
+./config/dev.js
