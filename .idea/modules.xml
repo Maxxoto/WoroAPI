@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/WoroApps.iml" filepath="$PROJECT_DIR$/.idea/WoroApps.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../woro-frontend/.idea/woro-frontend.iml" filepath="$PROJECT_DIR$/../woro-frontend/.idea/woro-frontend.iml" />
     </modules>
   </component>
 </project>
