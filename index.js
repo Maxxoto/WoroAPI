@@ -6,6 +6,9 @@ const bodyParser = require("body-parser");
 //Models import
 require("./models/User");
 
+//Middlewares import
+// const requireAuth = require("./middlewares/requireAuth");
+
 //Services import
 require("./services/passport");
 
