@@ -2,7 +2,7 @@
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 5000;
-
+const bodyParser = require("body-parser");
 //Models import
 require("./models/User");
 
@@ -25,6 +25,7 @@ mongoose.connect(keys.mongoURI, {
   useUnifiedTopology: true,
 });
 
+app.use(bodyParser.json());
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000, //30 Days , 24 Hours , 60 Minutes , 60 Seconds , 1000 Milliseconds,
