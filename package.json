@@ -6,6 +6,9 @@
   "author": "Maxxoto",
   "license": "MIT",
   "private": false,
+  "engines": {
+    "yarn" : "1.*"
+  },
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"
