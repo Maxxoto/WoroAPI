@@ -4,12 +4,8 @@ const requireCredit = require("../middlewares/requireCredit");
 
 const surveyTemplate = require("../services/emailTemplates");
 const Survey = mongoose.model("surveys");
-
-// echo "export SENDGRID_API_KEY='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'" > sendgrid.env
-// echo "sendgrid.env" >> .gitignore
-// source ./sendgrid.env
-
-module.exports = (App) => {
+const Mailer = require("../services/Mailer");
+module.exports = (app) => {
   app.post("/api/surveys", requireAuth, requireCredit, (req, res) => {
     const { title, subject, body, recipients } = req.body;
 
@@ -26,5 +22,6 @@ module.exports = (App) => {
     });
 
     const mailer = new Mailer(survey, surveyTemplate(survey));
+    mailer.send();
   });
 };
