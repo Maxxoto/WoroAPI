@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 5000;
 const bodyParser = require("body-parser");
 //Models import
 require("./models/User");
-
+require("./models/Survey");
 //Middlewares import
 // const requireAuth = require("./middlewares/requireAuth");
 
@@ -15,7 +15,7 @@ require("./services/passport");
 //Routes import
 const AuthRoute = require("./routes/authRoutes");
 const BillingRoute = require("./routes/billingRoutes");
-
+const SurveyRoute = require("./routes/surveyRoutes");
 //Additional Import
 const mongoose = require("mongoose");
 const keys = require("./config/keys");
@@ -41,7 +41,7 @@ app.use(passport.session());
 
 AuthRoute(app);
 BillingRoute(app);
-
+SurveyRoute(app);
 //or
 //require('./routes/auth')(app)
 
