@@ -55,12 +55,8 @@ class Mailer extends classes.Mail {
         body: this.toJSON(),
       };
 
-      console.log("THIS JSON :" + JSON.stringify(this.toJSON()));
-      const res = await client.request(request);
-      return res;
-
-      console.log(res.statusCode);
-      console.log(res.body);
+      // console.log("THIS JSON :" + JSON.stringify(this.toJSON()));
+      return await client.request(request);
     } catch (e) {
       console.log("Error :" + e);
     }
