@@ -1,0 +1,21 @@
+{
+  "from":
+    {
+    "email":"woroapps@sendgrid.net"
+    },
+  "subject": "Halo subject",
+  "personalizations":
+    [
+      {"to":
+        [
+          {"email":"ahmatdanis24@gmail.com"}
+        ]
+      }
+    ],
+  "content":
+    [
+      { "value":"<div>Hello There  </div>",
+        "type":"text/html"
+      }
+    ]
+}

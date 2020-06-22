@@ -1,50 +1,69 @@
-const sendgrid = require("sendgrid");
-const helper = sendgrid.mail;
+const sg = require("@sendgrid/mail");
+const { classes } = require("@sendgrid/helpers");
+const client = require("@sendgrid/client");
+// const helper = sendgrid.mail;
 const keys = require("../config/keys");
 
-class Mailer extends helper.Mail {
+client.setApiKey(keys.sendGridKey);
+
+class Mailer extends classes.Mail {
   constructor({ subject, recipients }, content) {
     super();
 
-    this.sgAPI = sendgrid(keys.sendGridKey);
-    this.from_email = new helper.Email("woroapps@sendgrid.net");
-    this.subject = subject;
-    this.body = new helper.Content("text/html", content);
+    this.setFrom("bob@sendgrid.net");
+    this.setSubject(subject);
+    // this.body = new helpers.Content("text/html", content);
+    // this.setContent(content);
+    this.body = this.addHtmlContent(content);
     this.recipients = this.formatAddresses(recipients);
 
-    this.addContent(this.body);
-    this.addClickTracking();
+    // this.addContent(this.body);
+    // this.addClickTracking();
     this.addRecipients();
   }
+
   formatAddresses(recipients) {
     return recipients.map(({ email }) => {
-      return new helper.Email(email);
+      return new classes.EmailAddress(email);
     });
   }
 
-  addClickTracking() {
-    const trackingSettings = new helper.TrackingSettings();
-    const clickTracking = new helper.ClickTracking(true, true);
-    trackingSettings.setClickTracking(clickTracking);
-    this.addTrackingSettings(trackingSettings);
-  }
+  // addClickTracking() {
+  // const trackingSettings = new helper.TrackingSettings();
+  //   const trackingSettings = new client.
+  //   const clickTracking = new helper.ClickTracking(true, true);
+  //   trackingSettings.setClickTracking(clickTracking);
+  //   this.addTrackingSettings(trackingSettings);
+  // }
 
   addRecipients() {
-    const personalize = new helper.Personalization();
+    const personalize = new classes.Personalization();
     this.recipients.forEach((recipient) => {
       personalize.addTo(recipient);
     });
-    this.addPersonalization(personalize);
+
+    this.addPersonalization(personalize.toJSON());
   }
 
   async send() {
-    const request = this.sgAPI.emptyRequest({
-      method: "POST",
-      path: "/v3/mail/send",
-      body: this.toJSON(),
-    });
-    const response = this.sgAPI.API(request);
-    return response;
+    // const request = this.sgAPI.emptyRequest({
+
+    try {
+      const request = {
+        method: "POST",
+        url: "/v3/mail/send",
+        body: this.toJSON(),
+      };
+
+      console.log("THIS JSON :" + JSON.stringify(this.toJSON()));
+      const res = await client.request(request);
+      return res;
+
+      console.log(res.statusCode);
+      console.log(res.body);
+    } catch (e) {
+      console.log("Error :" + e);
+    }
   }
 }
 
