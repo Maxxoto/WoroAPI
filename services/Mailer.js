@@ -10,7 +10,7 @@ class Mailer extends classes.Mail {
   constructor({ subject, recipients }, content) {
     super();
 
-    this.setFrom("bob@sendgrid.net");
+    this.setFrom("no-reply@woroapps.maxxoto.me");
     this.setSubject(subject);
     // this.body = new helpers.Content("text/html", content);
     // this.setContent(content);
