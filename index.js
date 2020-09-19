@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 5000;
 const bodyParser = require("body-parser");
+const cors = require("cors");
 //Models import
 require("./models/User");
 require("./models/Survey");
@@ -28,6 +29,7 @@ mongoose.connect(keys.mongoURI, {
   useUnifiedTopology: true,
 });
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(
   cookieSession({
