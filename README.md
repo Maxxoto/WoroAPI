@@ -1,7 +1,5 @@
 # WoroApps API - Backend Service for WoroApps
 
-<img src="./src/assets/images/github-image.png">
-
 [![GitHub version](https://img.shields.io/badge/version-v1.0.0-blue.svg)](#)
 [![License](https://img.shields.io/github/license/yilber/readme-boilerplate.svg)](https://github.com/Maxxoto/WoroFrontend/blob/master/LICENSE)
 [![Build Status](https://travis-ci.org/Maxxoto/WoroAPI.svg?branch=master)](https://travis-ci.org/Maxxoto/WoroAPI)
