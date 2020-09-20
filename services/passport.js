@@ -25,8 +25,6 @@ passport.use(
       passReqToCallback: true,
     },
     async (req, accessToken, refreshToken, profile, done) => {
-      // console.log("Profile : ",profile)
-      console.log(profile);
       const existingUser = await User.findOne({ googleID: profile.id });
       if (existingUser) {
         //    Already have users in the database

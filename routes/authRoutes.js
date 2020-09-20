@@ -18,6 +18,7 @@ module.exports = (app) => {
 
   // Get my profile
   app.get("/api/users/me", (req, res) => {
+    console.log(req.user);
     res.send(req.user);
   });
 
