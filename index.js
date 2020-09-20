@@ -31,6 +31,7 @@ mongoose.connect(keys.mongoURI, {
 
 app.use(cors());
 app.use(bodyParser.json());
+app.set("trustproxy", true);
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000, //30 Days , 24 Hours , 60 Minutes , 60 Seconds , 1000 Milliseconds,
