@@ -29,7 +29,10 @@ mongoose.connect(keys.mongoURI, {
   useUnifiedTopology: true,
 });
 
-app.use(cors());
+app.use(cors({
+  methods:['GET','POST'],
+  credentials: true
+}))
 app.use(bodyParser.json());
 app.set("trustproxy", true);
 app.use(
