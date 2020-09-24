@@ -4,6 +4,11 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const bodyParser = require("body-parser");
 const cors = require("cors");
+
+const redis = require("redis");
+const redisClient = redis.createClient(process.env.REDIS_URL);
+const redisStore = require("connect-redis")(session);
+
 //Models import
 require("./models/User");
 require("./models/Survey");
@@ -29,6 +34,10 @@ mongoose.connect(keys.mongoURI, {
   useUnifiedTopology: true,
 });
 
+redisClient.on("error", (err) => {
+  console.log("Redis error: ", err);
+});
+
 app.use(
   cors({
     origin: "https://woroapps.vercel.app",
@@ -44,8 +53,15 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: {
+      secure: true,
       maxAge: 60000,
     },
+    store: new redisStore({
+      // host: "ec2-54-80-72-92.compute-1.amazonaws.com",
+      // port: 25179,
+      client: redisClient,
+      ttl: 86400,
+    }),
   })
 );
 
