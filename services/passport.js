@@ -29,7 +29,7 @@ passport.use(
       if (existingUser) {
         //    Already have users in the database
         console.log(existingUser);
-        console.log("REQ USER : ", req.user);
+        console.log("REQ USER : ", req);
 
         done(null, existingUser);
       } else {
