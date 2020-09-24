@@ -6,11 +6,13 @@ const mongoose = require("mongoose");
 const User = mongoose.model("users");
 
 passport.serializeUser((user, done) => {
+  console.log("Serialize : ", user);
   done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
   User.findById(id).then((user) => {
+    console.log("Deserialize : ", user);
     done(null, user);
   });
 });
@@ -28,8 +30,6 @@ passport.use(
       const existingUser = await User.findOne({ googleID: profile.id });
       if (existingUser) {
         //    Already have users in the database
-        console.log(existingUser);
-        console.log("REQ USER : ", req);
 
         done(null, existingUser);
       } else {
