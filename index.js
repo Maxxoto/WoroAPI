@@ -44,6 +44,7 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: {
+      secure: true,
       maxAge: 60000,
     },
   })
