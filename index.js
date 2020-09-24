@@ -20,7 +20,7 @@ const SurveyRoute = require("./routes/surveyRoutes");
 //Additional Import
 const mongoose = require("mongoose");
 const keys = require("./config/keys");
-const cookieSession = require("cookie-session");
+const session = require("express-session");
 const passport = require("passport");
 
 //Set connection into mongoDB
@@ -37,11 +37,15 @@ app.use(
   })
 );
 app.use(bodyParser.json());
-app.set("trustproxy", true);
+app.set("trust proxy", 1);
 app.use(
-  cookieSession({
-    maxAge: 30 * 24 * 60 * 60 * 1000, //30 Days , 24 Hours , 60 Minutes , 60 Seconds , 1000 Milliseconds,
-    keys: [keys.cookieKey],
+  session({
+    secret: keys.cookieKey,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      maxAge: 60000,
+    },
   })
 );
 
