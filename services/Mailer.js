@@ -1,8 +1,8 @@
-const sg = require("@sendgrid/mail");
-const { classes } = require("@sendgrid/helpers");
-const client = require("@sendgrid/client");
+const sg = require('@sendgrid/mail');
+const { classes } = require('@sendgrid/helpers');
+const client = require('@sendgrid/client');
 // const helper = sendgrid.mail;
-const keys = require("../config/keys");
+const keys = require('../config/keys');
 
 client.setApiKey(keys.sendGridKey);
 
@@ -10,7 +10,7 @@ class Mailer extends classes.Mail {
   constructor({ subject, recipients }, content) {
     super();
 
-    this.setFrom("no-reply@woroapps.maxxoto.me");
+    this.setFrom('no-reply@woroapps.com');
     this.setSubject(subject);
     // this.body = new helpers.Content("text/html", content);
     // this.setContent(content);
@@ -50,15 +50,15 @@ class Mailer extends classes.Mail {
 
     try {
       const request = {
-        method: "POST",
-        url: "/v3/mail/send",
+        method: 'POST',
+        url: '/v3/mail/send',
         body: this.toJSON(),
       };
 
       // console.log("THIS JSON :" + JSON.stringify(this.toJSON()));
       return await client.request(request);
     } catch (e) {
-      console.log("Error :" + e);
+      console.log('Error :' + e);
     }
   }
 }

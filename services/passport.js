@@ -1,19 +1,16 @@
-const passport = require("passport");
-const oauth = require("passport-google-oauth20");
-const keys = require("../config/keys");
-const mongoose = require("mongoose");
+const passport = require('passport');
+const oauth = require('passport-google-oauth20');
+const keys = require('../config/keys');
+const mongoose = require('mongoose');
 
-const User = mongoose.model("users");
+const User = mongoose.model('users');
 
 passport.serializeUser((user, done) => {
-  console.log("Serialize : ", user);
   done(null, user._id);
 });
 
 passport.deserializeUser((id, done) => {
-  console.log("ID : ", id);
   User.findById(id).then((user) => {
-    console.log("Deserialize : ", user);
     done(null, user);
   });
 });
@@ -23,8 +20,8 @@ passport.use(
     {
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
-      callbackURL: "/auth/google/callback",
-      proxy: true,
+      callbackURL: '/auth/google/callback',
+      // proxy: true,
       passReqToCallback: true,
     },
     async (req, accessToken, refreshToken, profile, done) => {
@@ -41,6 +38,6 @@ passport.use(
         }).save();
         done(null, user);
       }
-    }
-  )
+    },
+  ),
 );
